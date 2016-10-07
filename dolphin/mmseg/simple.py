@@ -18,7 +18,7 @@ def build_trier(filename):
     return trier_root
 
 def search_trier_all(trier,sentence):
-    if sentence == None:
+    if sentence == None or sentence == "":
         return None
     chs = list()
     all_chs = list()
@@ -38,6 +38,8 @@ def search_trier_all(trier,sentence):
 
 def get_first_max_len(trier,sentence):
     all_chs = search_trier_all(trier,sentence)
+    if all_chs == None:
+        return None
     max_len = 0
     max_pos = 0
     i = 0

@@ -13,7 +13,6 @@ def test_build_trier():
     assert b'\1' not in root["中"]
     assert not b'\1' in root["中"]
     assert len(root["中"]) == 1
-    assert len(root) == 1
 
 def test_search_trier_all():
     trier = build_trier("tests/dict.txt")
