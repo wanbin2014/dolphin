@@ -26,8 +26,9 @@ class seg_word:
         res.append(words)
         while words:
             new_sentence = multi_lstrip(context,words)
-            print(new_sentence)
+
             words = get_first_max_len(self.trier,new_sentence)
+            print(words)
             context = new_sentence
             if words:
                 res.append(words)
