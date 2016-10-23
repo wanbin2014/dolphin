@@ -12,9 +12,13 @@ chinese = set(list(range(0x4E00, 0xA000)) +
 
 
 def multi_lstrip(src, trip_words):
-    for ch in trip_words:
-        src = src.lstrip(ch)
-    return src
+    trip_words_str = ''.join(trip_words)
+    pos = src.find(trip_words_str)
+    if pos == 0:
+        src = src[len(trip_words_str):]
+        return src
+    else:
+        return src
 
 
 def split_by_punctuation(sentence):
