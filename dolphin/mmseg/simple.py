@@ -1,12 +1,15 @@
 
+from dolphin.mmseg.util import *
 
-def build_trier(filename):
+def build_trier(filename,trier_root = dict()):
     fp = open(filename)
-    trier_root = dict()
     for line in fp:
-
+        words = get_chinese_word(line)
+        if not words  or  len(words[0]) <= 1:
+            continue
+        words[0] += '\n'
         trier = trier_root
-        for ch in line:
+        for ch in words[0]:
             if ch == '\n':
                 trier[b'\1'] = 0  # Expressing end of word.
                 continue
