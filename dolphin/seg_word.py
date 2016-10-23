@@ -22,15 +22,19 @@ class seg_word:
         res = list()
 
         words = get_first_max_len(self.trier,context)
+        print(words)
         res.append(words)
         while words:
             new_sentence = multi_lstrip(context,words)
+            print(new_sentence)
             words = get_first_max_len(self.trier,new_sentence)
-            res.append(words)
+            context = new_sentence
+            if words:
+                res.append(words)
         return res
 
 
-        
+
 
     def complex_seg(self,context):
         pass
