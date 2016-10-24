@@ -33,6 +33,8 @@ def split_by_punctuation(sentence):
             if s:
                 res.append(s)
             s = ""
+    if len(res) == 0 and s:
+        res.append(s)
     return res
 
 

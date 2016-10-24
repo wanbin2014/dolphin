@@ -20,22 +20,20 @@ class seg_word:
 
     def simple_seg(self,context):
         res = list()
-
-        words = get_first_max_len(self.trier,context)
-        print(words)
-        res.append(words)
-        while words:
-            new_sentence = multi_lstrip(context,words)
-
-            words = get_first_max_len(self.trier,new_sentence)
+        sentences = get_chinese_word(context)
+        for sentence in sentences:
+            words = get_first_max_len(self.trier,sentence)
             print(words)
-            context = new_sentence
-            if words:
-                res.append(words)
+            res.append(words)
+            while words:
+                new_sentence = multi_lstrip(sentence,words)
+
+                words = get_first_max_len(self.trier,new_sentence)
+                print(words)
+                sentence = new_sentence
+                if words:
+                    res.append(words)
         return res
-
-
-
 
     def complex_seg(self,context):
         pass
