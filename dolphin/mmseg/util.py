@@ -21,6 +21,7 @@ def multi_lstrip(src, trip_words):
         return src
 
 
+
 def split_by_punctuation(sentence):
 
     res = list()
@@ -33,12 +34,30 @@ def split_by_punctuation(sentence):
             if s:
                 res.append(s)
             s = ""
-    if len(res) == 0 and s:
+    if s:
         res.append(s)
     return res
 
 
 def get_chinese_word(sentence):
     return split_by_punctuation(sentence)
+
+def strip_stop_word(sentence):
+    res = list()
+    for i in range(len(sentence)):
+        if sentence[i] == '的':
+            if  (i+1) <= len(sentence) and sentence[i+1] == '士' or sentence[i+1] == "哥":
+                res.append(sentence[i])
+                continue
+            else:
+                continue
+        else:
+            res.append(sentence[i])
+            continue
+
+    return ''.join(res)
+
+
+
 
 
