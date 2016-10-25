@@ -1,5 +1,5 @@
 import pytest
-from dolphin.mmseg.util import split_by_punctuation,get_chinese_word
+from dolphin.mmseg.util import split_by_punctuation,get_chinese_word,strip_stop_word
 
 
 
@@ -20,6 +20,12 @@ def test_split_by_punctuation():
 
     res = get_chinese_word("尽管之前发生了一些事故")
     assert(res[0] == "尽管之前发生了一些事故")
+
+    res = get_chinese_word("代表北大的人大代表，代表人大的北大博士")
+    assert(res[1] == "代表人大的北大博士")
+
+    res = strip_stop_word("代表北大的人大代表，代表人大的北大博士")
+    print(res)
 
 
 

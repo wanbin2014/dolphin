@@ -42,7 +42,7 @@ def get_three_word_chunk(trier,sentence):
         i += 1
 
     return max_len_chunks
-
+'''
 def get_max_length_chunk(trier,sentence):
     all_chunk = get_three_word_chunk(trier,sentence)
     max_len = 0
@@ -58,9 +58,8 @@ def get_max_length_chunk(trier,sentence):
         i += 1
 
     return all_chunk[i]
-"""
 
-"""
+'''
 
 def largest_avg_word_len(chunks):
 
@@ -138,7 +137,20 @@ def largest_sum_freq_one_word(freq_dict,chunks):
 
 
 
-
+def complex_seg(trier,sentence):
+    if not sentence:
+        return None
+    chunks = get_three_word_chunk(trier,sentence)
+    if len(chunks) > 1:
+        largest_avg_chunks = largest_avg_word_len(chunks)
+        if len(largest_avg_chunks) > 1:
+            smallest_var_word_chunks = smallest_var_word_length(largest_avg_chunks)
+            words = ''.join(smallest_var_word_chunks[0][0])
+        else:
+            words = ''.join(largest_avg_chunks[0][0])
+    else:
+        words = ''.join(chunks[0][0])
+    return words
 
 
 
