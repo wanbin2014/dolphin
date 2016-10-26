@@ -16,12 +16,35 @@ class seg_word:
                 for sub_dir in sub_dirs:
                     self.trier = build_trier(dict_path + "/" + dir + "/" + sub_dir,self.trier)
 
+        freq_path = dir_path + "/freq"
+        dirs = os.listdir(freq_path)
+        for dir in dirs:
+            self.trier = build_trier(freq_path + "/" + dir,self.trier)
+            self.freq_dict = self.build_freq_dict(freq_path + "/" + dir)
+
+
+    def build_freq_dict(self,filename):
+        freq_dict = dict()
+        fp = open(filename)
+        for line in fp:
+            try:
+                fields = line.split(" ")
+                if len(fields) >= 2:
+                    freq_dict[fields[0]] = int(fields[1])
+            except Exception :
+                continue
+        fp.close()
+        return freq_dict
+
+
+
+
     def add_dict(self,filename):
         self.trier = build_trier(filename,self.trier)
 
     def simple_seg(self,context):
         res = list()
-        sentences = get_chinese_word(strip_stop_word(context))
+        sentences = get_chinese_word(context)
         for sentence in sentences:
             words = get_first_max_len(self.trier,sentence)
             print(words)
@@ -40,16 +63,16 @@ class seg_word:
 
     def complex_seg(self,context):
         res = list()
-        sentences = get_chinese_word(strip_stop_word(context))
+        sentences = get_chinese_word(context)
         print(sentences)
         for sentence in sentences:
-            words = complex_seg(self.trier,sentence)
+            words = complex_seg(self.trier,self.freq_dict,sentence)
 
             res.append(words)
 
             while words:
                 new_sentence = multi_lstrip(sentence,words)
-                words = complex_seg(self.trier,new_sentence)
+                words = complex_seg(self.trier,self.freq_dict,new_sentence)
                 sentence = new_sentence
                 if words:
                     res.append(words)

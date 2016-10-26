@@ -137,7 +137,7 @@ def largest_sum_freq_one_word(freq_dict,chunks):
 
 
 
-def complex_seg(trier,sentence):
+def complex_seg(trier,freq_dict,sentence):
     if not sentence:
         return None
     chunks = get_three_word_chunk(trier,sentence)
@@ -145,7 +145,12 @@ def complex_seg(trier,sentence):
         largest_avg_chunks = largest_avg_word_len(chunks)
         if len(largest_avg_chunks) > 1:
             smallest_var_word_chunks = smallest_var_word_length(largest_avg_chunks)
-            words = ''.join(smallest_var_word_chunks[0][0])
+            if len(smallest_var_word_chunks) > 1:
+                largest_sum_freq_chunks = largest_sum_freq_one_word(freq_dict,smallest_var_word_chunks)
+                words = ''.join(largest_sum_freq_chunks[0])
+            else:
+                words = ''.join(smallest_var_word_chunks[0][0])
+
         else:
             words = ''.join(largest_avg_chunks[0][0])
     else:

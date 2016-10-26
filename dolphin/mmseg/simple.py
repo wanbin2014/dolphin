@@ -18,6 +18,7 @@ def build_trier(filename,trier_root = dict()):
             else:
                 trier[ch] = dict()
                 trier = trier[ch]
+    fp.close()
     return trier_root
 
 def search_trier_all(trier,sentence):
