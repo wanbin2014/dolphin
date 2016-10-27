@@ -1,6 +1,6 @@
 from dolphin.seg_word import *
 
-'''
+
 seg = seg_word()
 
 def test_seg_word_init():
@@ -21,8 +21,8 @@ def test_seg_word_init():
     res = seg.complex_seg("代表北大的人大代表，代表人大的北大博士")
     res = seg.complex_seg("咬死猎人的狗")
     res = seg.complex_seg("我到东门去买米，东门人多挤又挤")
+    res = seg.simple_seg("我到东门去买米，东门人多挤又挤")
     res = seg.complex_seg("房产的一次性交易流程")
 
-'''
 
 

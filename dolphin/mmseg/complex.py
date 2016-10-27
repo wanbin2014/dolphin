@@ -115,6 +115,28 @@ def smallest_var_word_length(chunks):
     return max_var_chunks
 
 
+def largest_low_freq_one_word(freq_dcit,chunks):
+    largest_low = 0
+    largest_low_pos = 0
+    i = 0
+    for chunk in chunks:
+        low = 10000
+        for word in chunk:
+
+            if ''.join(word) in freq_dcit:
+                if freq_dcit[''.join(word)] < low:
+                    low = freq_dcit[''.join(word)]
+
+
+        if low != 10000 and low > largest_low:
+            largest_low = low
+            largest_low_pos = i
+        i += 1
+
+    return chunks[largest_low_pos]
+
+
+
 def largest_sum_freq_one_word(freq_dict,chunks):
     largest_sum_log_freq = 0.0
     largest_sum_log_freq_pos = 0
@@ -133,8 +155,10 @@ def largest_sum_freq_one_word(freq_dict,chunks):
             largest_sum_log_freq = log_freq
             largest_sum_log_freq_pos = i
         i += 1
-    return chunks[largest_sum_log_freq_pos]
 
+    if largest_sum_log_freq == 0.0:
+        return largest_low_freq_one_word(freq_dict,chunks)
+    return chunks[largest_sum_log_freq_pos]
 
 
 def complex_seg(trier,freq_dict,sentence):
@@ -145,9 +169,13 @@ def complex_seg(trier,freq_dict,sentence):
         largest_avg_chunks = largest_avg_word_len(chunks)
         if len(largest_avg_chunks) > 1:
             smallest_var_word_chunks = smallest_var_word_length(largest_avg_chunks)
+            print("smallest_var_word_chunks:")
+            print(smallest_var_word_chunks)
             if len(smallest_var_word_chunks) > 1:
-                largest_sum_freq_chunks = largest_sum_freq_one_word(freq_dict,smallest_var_word_chunks)
-                words = ''.join(largest_sum_freq_chunks[0])
+                largest_sum_freq_chunk = largest_sum_freq_one_word(freq_dict,smallest_var_word_chunks)
+                print("largest_sum_freq_chunk:")
+                print(largest_sum_freq_chunk)
+                words = ''.join(largest_sum_freq_chunk[0])
             else:
                 words = ''.join(smallest_var_word_chunks[0][0])
 
