@@ -10,7 +10,6 @@ def test_get_three_word_chunk():
     assert len(all_chunks) == 3
 
     all_chunks = get_three_word_chunk(trier,"一次性交易流程")
-    print(all_chunks)
 
 
 
@@ -23,7 +22,6 @@ def test_largest_avg_word_len():
 
     all_chunks = get_three_word_chunk(trier,"一次性交易流程")
     largest_avg_chunk = largest_avg_word_len(all_chunks)
-    print(largest_avg_chunk)
 
 
 def test_smallest_var_word_length():
@@ -49,16 +47,11 @@ def test_largest_sum_freq_one_word():
     assert len(largest_avg_chunk) == 2
     smallest_var_chunk = smallest_var_word_length(all_chunks)
     assert len(smallest_var_chunk) == 2
-    largest_sum_freq = largest_sum_freq_one_word(freq_dict,all_chunks)
+    largest_sum_freq = largest_sum_freq_one_word(freq_dict,dict(),all_chunks)
     assert largest_sum_freq[0] == ["主","要"]
     assert largest_sum_freq[1] == "是"
     assert largest_sum_freq[2] == ["因","为"]
 
-def test_complex_seg():
-    trier = build_trier("tests/dict.txt")
-    freq_dict = dict()
-    words = complex_seg(trier,freq_dict,"一次性交易流程")
-    print(words)
 
 
 
