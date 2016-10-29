@@ -25,7 +25,6 @@ def test_split_by_punctuation():
     assert(res[1] == "代表人大的北大博士")
 
     res = strip_stop_word("代表北大的人大代表，代表人大的北大博士")
-    print(res)
 
 
 
